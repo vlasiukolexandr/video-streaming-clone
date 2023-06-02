@@ -1,35 +1,29 @@
 import React from 'react';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface InputProps {
   id: string;
   label: string;
-  onChange: any;
-  value: string;
   type?: string;
+  error?: string;
 
-  removeFromDOM?: boolean;
+  register?: UseFormRegister<FieldValues>;
 }
 
 const Input: React.FC<InputProps> = ({
   id,
-  onChange,
-  value,
   label,
   type,
+  error,
 
-  removeFromDOM
+  register
 }) => {
-  if (removeFromDOM) {
-    return null;
-  }
-
   return (
     <div className="relative">
       <input 
         id={id}
         type={type}
-        value={value}
-        onChange={onChange}
+        {...register?.(id)}
         className="
           block
           rounded-md
@@ -69,6 +63,7 @@ const Input: React.FC<InputProps> = ({
       >
         {label}
       </label>
+      {!!error && <p className="text-red-700 text-sm">{error}</p>}
     </div>
   )
 }

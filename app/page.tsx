@@ -1,5 +1,9 @@
+'use client';
+import ClientDataCard from "@/components/pages/Home/ClientDataCard";
+
 export default function Home() {
   return (
-    <div className="text-2xl">Test page</div>
-  )
+    <ClientDataCard />
+  );
 }
+

@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Input } from "@/components/Input";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from 'yup';
@@ -24,12 +24,20 @@ const SignInForm = () => {
     register,
     handleSubmit,
     setError,
+    clearErrors,
+    watch,
     formState: { errors }
   } = useForm<FieldValues>({
     defaultValues,
     resolver: yupResolver(validationSchema)
   });
   const { loginHandler } = useLogin({ setError });
+
+  useEffect(() => {
+    const valueChangeSubscription = watch(() => clearErrors());
+
+    return () => valueChangeSubscription.unsubscribe()
+  }, [watch, clearErrors])
 
   return (
     <>
@@ -53,7 +61,11 @@ const SignInForm = () => {
             error={errors.password?.message?.toString()}
           />
         </div>
-        <p className="text-red-700 text-sm">{errors.root?.serverError?.message?.toString()}</p>
+        <div className="relative">
+          <span className="absolute text-red-700 text-sm right-0 top-2">
+            {errors.root?.serverError?.message?.toString()}
+          </span>
+        </div>
         <button
           type="submit"
           className="

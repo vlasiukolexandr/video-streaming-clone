@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { FieldValue, FieldValues, UseFormSetError } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { MAIN_PAGE } from "@/app/constants";
 
 export const useLogin = ({ setError }: { setError: UseFormSetError<FieldValues> }) => {
   const router = useRouter();
@@ -14,13 +15,15 @@ export const useLogin = ({ setError }: { setError: UseFormSetError<FieldValues> 
         callbackUrl: '/'
       });
       if (response?.ok) {
-        router.push('/');
-      } else {
-        setError('root.serverError', { 
-          type: response?.status.toString(),
-          message: 'Wrong email or password'
-        });
+        if (!response.error) {
+          router.push(MAIN_PAGE);
+          return;
+        }
       }
+      setError('root.serverError', { 
+        type: response?.status.toString(),
+        message: 'Wrong email or password'
+      });
     } catch (error) {
       console.log(error);
     }

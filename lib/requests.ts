@@ -20,20 +20,25 @@ export class Requests {
     };
   }
 
-  private request = async (url: string, method: CustomMethod, data?: Data | FormData): Promise<CustomResponse> => {
+  private request = async <T>(url: string, method: CustomMethod, data?: Data | FormData): Promise<CustomResponse<T>> => {
     const response = await fetch(`${this.baseURL}${url}`, {
       method,
       ...this.requestSettings,
       body: data instanceof FormData ? data : JSON.stringify(data),
     });
+    const body = await response.json();
+
+    if (!!body.error) {
+      throw new Error(body.error);
+    }
 
     return {
       status: response.status,
-      data: response.json()
-    }
+      data: body, 
+    };
   }
 
-  public get = async (url: string) => this.request(url, CustomMethod.GET);
+  public get = async <T>(url: string): Promise<CustomResponse<T>> => this.request<T>(url, CustomMethod.GET);
   public delete = async (url: string) => this.request(url, CustomMethod.DELETE);
   public post = async (url: string, data: Data) => this.request(url, CustomMethod.POST, data);
   public update = async (url: string, data: Data) => this.request(url, CustomMethod.PUT, data);
@@ -100,9 +105,10 @@ enum CustomReferPolicy {
   UNSAFE_URL = "unsafe-url"
 }
 
-type CustomResponse = {
+type CustomResponse<T> = {
   status: number;
-  data?: unknown;
+  data?: T;
+  error?: unknown;
 }
 
 const DEFAULT_HEADERS = {

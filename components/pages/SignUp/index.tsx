@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { Input } from "@/components/Input";
-import { ErrorOption, FieldValues, useForm } from "react-hook-form";
+import { ErrorOption, FieldValues, useForm, Resolver } from "react-hook-form";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLogin } from "../SignIn/useLogin";
@@ -30,7 +30,7 @@ const SignUpForm = () => {
     formState: { errors }
   } = useForm<FieldValues>({
     defaultValues,
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema) as unknown as Resolver<FieldValues, any>
   });
   const { post } = useRequests();
   const { loginHandler } = useLogin({ setError });

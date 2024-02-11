@@ -2,8 +2,9 @@
 
 import React, { useCallback, useState } from "react";
 import Image from "next/image";
-import SignInForm from "@/components/pages/SignIn";
 import SignUpForm from "@/components/pages/SignUp";
+import SignInForm from "./components/SignIn";
+import { useTranslation } from "@/app/i18n/client";
 
 enum FormVariant {
   LOGIN,
@@ -11,6 +12,7 @@ enum FormVariant {
 }
 
 const Auth = () => {
+  const { t } = useTranslation('auth');
   const [variant, setVariant] = useState<FormVariant>(FormVariant.LOGIN);
 
   const toggleVarian = useCallback(() => {
@@ -32,13 +34,13 @@ const Auth = () => {
           <div className="flex justify-center">
             <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md w-full">
               {variant === FormVariant.LOGIN ? <SignInForm /> : <SignUpForm />}
-              <p className="text-neutral-500 mt-12">
-                {variant === FormVariant.LOGIN ? 'First time using Netflix?' : 'Already have an account'}
+              <p className="text-neutral-500 mt-12 flex justify-between">
+                {variant === FormVariant.LOGIN ? t('change_form_label_login') : t('change_form_label_signin')}
                 <span
                   className="text-white ml-1 hover:underline cursor-pointer"
                   onClick={toggleVarian}
                 >
-                  {variant === FormVariant.LOGIN ? 'Create and account' : 'Login'}
+                  {variant === FormVariant.LOGIN ? t('create_and_account') : t('login')}
                 </span>
               </p>
             </div>

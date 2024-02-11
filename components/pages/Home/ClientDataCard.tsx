@@ -1,8 +1,10 @@
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { useAppSelector } from "@/redux/hooks";
 import { signOut } from "next-auth/react";
 
 const ClientDataCard = () => {
-  const { currentUser } = useAppSelector(state => state.currentUser);
+  const { data: currentUser } = useCurrentUser();
+  // const { currentUser } = useAppSelector(state => state.currentUser);
 
   return (
     <>

@@ -11,8 +11,8 @@ export const useLogin = ({ setError }: { setError: UseFormSetError<FieldValues> 
     try {
       const response = await signIn('credentials', {
         ...data,
-        redirect: false,
-        callbackUrl: '/'
+        redirect: true,
+        callbackUrl: '/en/'
       });
       if (response?.ok) {
         if (!response.error) {

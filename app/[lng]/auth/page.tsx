@@ -1,17 +1,26 @@
 'use client';
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import SignUpForm from "@/components/pages/SignUp";
 import SignInForm from "./components/SignIn";
 import { useTranslation } from "@/app/i18n/client";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { MAIN_PAGE } from "@/app/constants";
 
 enum FormVariant {
   LOGIN,
   CREATE_ACCOUNT
 }
 
+const UNAUTHENTICATED = 'unauthenticated';
+const AUTHENTICATED = 'authenticated';
+
 const Auth = () => {
+  const session = useSession()
+  const router = useRouter();
+
   const { t } = useTranslation('auth');
   const [variant, setVariant] = useState<FormVariant>(FormVariant.LOGIN);
 
@@ -20,6 +29,14 @@ const Auth = () => {
       (currentVarian: FormVariant) => 
         currentVarian === FormVariant.LOGIN ? FormVariant.CREATE_ACCOUNT : FormVariant.LOGIN);
   }, []);
+
+  useEffect(() => {
+    if (session.status === AUTHENTICATED) {
+      router.push(MAIN_PAGE);
+    }
+  }, [session.status]);
+
+  if (session.status !== UNAUTHENTICATED) return null;
 
   return (
     <div className="relative h-full w-full bg-auth-main bg-no-repeat bg-center bg-fixed bg-cover">

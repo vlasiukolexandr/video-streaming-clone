@@ -1,4 +1,3 @@
-import AuthCheck from '@/interceptors/components/AuthCheck';
 import '../globals.css'
 import { Providers } from "@/redux/provider";
 import { languages } from '../i18n/settings';
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <body>
-        <AuthCheck />
         <Providers>
           <DefaultsSetup lng={lng} />
           {children}

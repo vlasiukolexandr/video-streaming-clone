@@ -1,7 +1,7 @@
-import { User } from "@prisma/client";
+import { User, Movie } from "@prisma/client";
 import { Requests } from "./requests";
 
-const fetcher = async (url: string): Promise<User | undefined> => {
+const fetcher = async (url: string): Promise<User | Movie | undefined> => {
   const request = new Requests();
   let response = undefined;
   try {

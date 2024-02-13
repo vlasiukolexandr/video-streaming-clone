@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import acceptLanguage from 'accept-language';
 import { fallbackLng, languages } from './app/i18n/settings';
 import withAuth from 'next-auth/middleware';
+import { getToken } from 'next-auth/jwt';
 
 acceptLanguage.languages(languages);
 
@@ -52,11 +53,15 @@ function middleware(request: NextRequest) {
   });
 }
 
-export default withAuth(middleware, {
+export default withAuth(middleware,{
   callbacks: {
-    authorized: ({ token }) => {
-      return !!token;
-      // return true ;
+    authorized: async ({ req }) => {
+      const token = await getToken({
+        req,
+        secret: process.env.NEXTAUTH_JWT_SECRET,
+      })
+
+      return !!token
     },
   },
 });

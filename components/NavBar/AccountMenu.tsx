@@ -1,5 +1,6 @@
 import React from "react";
 import { signOut, useSession } from "next-auth/react";
+import { useTranslation } from "@/app/i18n/client";
 
 interface AccountMenuProps {
   visible?: boolean;
@@ -7,6 +8,7 @@ interface AccountMenuProps {
 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const session = useSession();
+  const { t } = useTranslation();
 
   if (!visible) return null;
 
@@ -19,7 +21,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div onClick={() => signOut()} className="px-3 text-center text-white text-sm hover:underline">
-          Sign out of Netflix
+          {t('sign_out')}
         </div>
       </div>
     </div>

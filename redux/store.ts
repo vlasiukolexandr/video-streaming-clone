@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import currentUserSlice from '@/redux/user/userSlice';
 import defaultsSlice from '@/redux/defaults/defaultsSlice';
 
 export const store = configureStore({
   reducer: {
-    currentUser: currentUserSlice,
     appDefaults: defaultsSlice,
   },
 });

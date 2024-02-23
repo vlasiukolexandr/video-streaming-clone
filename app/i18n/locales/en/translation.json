@@ -1,1 +1,36 @@
-{}
+{
+  "change_form_label_login": "First time using Netflix?",
+  "change_form_label_signin": "Already have an account",
+  "create_and_account": "Create and account",
+  "login": "Login",
+  "sign_in": "Sign in",
+  "more_info": "More Info",
+  "play": "Play",
+  "new": "New",
+  "browse": "Browse",
+  "sign_out": "Sign out of Netflix",
+
+  "who_watching": "Who is watching?",
+  "watching": "Watching",
+
+  "trending": "Trending Now",
+  "my_list": "My List",
+
+  "menu": {
+    "home": "Home",
+    "series": "Series",
+    "films": "Films",
+    "new_popular": "New & Popular",
+    "my_list": "My List",
+    "browse_by_languages": "Browse by languages"
+  },
+
+  "login_form": {
+    "password": "Password",
+    "email": "Email",
+    "emailRequiredError": "Email is required",
+    "minPasswordError": "Password is too short - should be 4 chars minimum.",
+    "passwordRequiredError": "Required password",
+    "server_error": "Wrong email or password"
+  }
+}

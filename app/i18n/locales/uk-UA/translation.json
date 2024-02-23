@@ -1,0 +1,36 @@
+{
+  "change_form_label_login": "Вперше на Netflix?",
+  "change_form_label_signin": "Вже маю акаунт",
+  "create_and_account": "Створити та увійти",
+  "login": "Увійти",
+  "sign_in": "Вхід",
+  "more_info": "Детальніше",
+  "play": "Дивитись",
+  "new": "Новинка",
+  "browse": "Перегляди",
+  "sign_out": "Вийти з Netflix",
+
+  "who_watching": "Хто переглядає?",
+  "watching": "Переглядаю",
+
+  "trending": "В тренді",
+  "my_list": "Мій список",
+
+  "menu": {
+    "home": "Головна",
+    "series": "Серіали",
+    "films": "Фільми",
+    "new_popular": "Нове & Популярне",
+    "my_list": "Мій список",
+    "browse_by_languages": "Перегляд за мовами"
+  },
+
+  "login_form": {
+    "password": "Пароль",
+    "email": "Емейл",
+    "emailRequiredError": "Email обов`язковий",
+    "minPasswordError": "Пароль дуже короткий, потрібно бути більш ніж 4 символи.",
+    "passwordRequiredError": "Пароль обов`язковий",
+    "server_error": "Невірний емейл чи пароль"
+  }
+}

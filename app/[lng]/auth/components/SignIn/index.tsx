@@ -21,7 +21,7 @@ const defaultValues = {
 };
 
 const SignInForm = () => {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,

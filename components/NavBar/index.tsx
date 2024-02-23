@@ -3,10 +3,12 @@ import MobileMenu from "./MobileMenu";
 import NavBarItem from "./NavBarItem";
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import AccountMenu from "./AccountMenu";
+import { useTranslation } from "@/app/i18n/client";
 
 const TOP_OFFSET = 66;
 
 const NavBar = () => {
+  const { t } = useTranslation();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground , setShowBackground] = useState(false);
@@ -51,12 +53,12 @@ const NavBar = () => {
           hidden
           lg:flex
         ">
-          <NavBarItem label="Home" />
-          <NavBarItem label="Series" />
-          <NavBarItem label="Films" />
-          <NavBarItem label="New & Popular" />
-          <NavBarItem label="My List" />
-          <NavBarItem label="Browse by languages" />
+          <NavBarItem label={t('menu.home')} />
+          <NavBarItem label={t('menu.series')} />
+          <NavBarItem label={t('menu.films')} />
+          <NavBarItem label={t('menu.new_popular')} />
+          <NavBarItem label={t('menu.my_list')} />
+          <NavBarItem label={t('menu.browse_by_languages')} />
         </div>
         <div className="
           lg:hidden
@@ -68,7 +70,7 @@ const NavBar = () => {
           cursor-pointer
           relative
         " onClick={toggleMobileMenu}>
-          <p className="text-white text-sm">Browse</p>
+          <p className="text-white text-sm">{t('browse')}</p>
           <BsChevronDown className={`text-white transition ${showMobileMenu ? 'rotate-180' : 'rotate-0'}`} /> 
           <MobileMenu visible={showMobileMenu} /> 
         </div>

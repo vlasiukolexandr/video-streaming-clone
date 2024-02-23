@@ -1,16 +1,19 @@
 import { fallbackLng } from '@/app/i18n/settings';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { Session } from 'next-auth';
 
 export interface DefaultAppState {
   lng: string;
-  sessionData: Session | null;
+
+  modalMovieId?: string;
+  isModalOpen?: boolean;
 }
 
 const initialState: DefaultAppState = {
   lng: fallbackLng,
-  sessionData: null,
+
+  modalMovieId: '',
+  isModalOpen: false,
 }
 
 export const defaultsSlice = createSlice({
@@ -23,9 +26,17 @@ export const defaultsSlice = createSlice({
     clearLng: (state) => {
       state.lng = fallbackLng;
     },
+
+    openModal: (state, action: PayloadAction<{modalMovieId: string}>) => {
+      state.isModalOpen = true;
+      state.modalMovieId = action.payload.modalMovieId;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+    }
   },
 });
 
-export const { setLng, clearLng } = defaultsSlice.actions;
+export const { setLng, clearLng, openModal, closeModal } = defaultsSlice.actions;
 
 export default defaultsSlice.reducer

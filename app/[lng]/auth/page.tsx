@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import SignUpForm from "@/components/pages/SignUp";
+import SignUpForm from "./components/SignUp";
 import SignInForm from "./components/SignIn";
 import { useTranslation } from "@/app/i18n/client";
 import { useSession } from "next-auth/react";
@@ -21,7 +21,7 @@ const Auth = () => {
   const session = useSession()
   const router = useRouter();
 
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation();
   const [variant, setVariant] = useState<FormVariant>(FormVariant.LOGIN);
 
   const toggleVarian = useCallback(() => {

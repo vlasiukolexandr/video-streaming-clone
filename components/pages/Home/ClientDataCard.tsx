@@ -1,20 +1,32 @@
+import React from "react";
 import NavBar from "@/components/NavBar";
-import useCurrentUser from "@/hooks/useCurrentUser";
-import { useAppSelector } from "@/redux/hooks";
-import { signOut } from "next-auth/react";
 import Billboard from "./components/Billboard";
+import MovieList from "@/components/MovieList";
+import useMovieList from "@/hooks/useMovieList";
+import useFavorites from "@/hooks/useFavorites";
+import InfoModal from "@/components/InfoModal";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { closeModal } from "@/redux/defaults/defaultsSlice";
+import { useTranslation } from "@/app/i18n/client";
 
 const ClientDataCard = () => {
-  const { data: currentUser } = useCurrentUser();
-  // const { currentUser } = useAppSelector(state => state.currentUser);
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  
+  const { data: movies = [] } = useMovieList();
+  const { data: favorites = [] } = useFavorites();
+
+  const { isModalOpen } = useAppSelector(state => state.appDefaults);
 
   return (
     <>
+      <InfoModal visible={isModalOpen} onClose={() => dispatch(closeModal())} />
       <NavBar />
       <Billboard />
-      {/* <div className="text-2xl text-green-600">Test page</div>
-      <div className="text-2xl text-green-600">{currentUser?.name}</div>
-      <button className="h-10 w-full bg-white" onClick={() => signOut()}>Logout</button> */}
+      <div className="pb-40">
+        <MovieList title={t('trending')} data={movies} />
+        <MovieList title={t('my_list')} data={favorites} />
+      </div> 
     </>
   );
 }

@@ -60,7 +60,7 @@ export const authOptions: AuthOptions = {
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
